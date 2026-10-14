@@ -1,0 +1,68 @@
+#!/bin/bash
+
+#=================================================
+# IMPORT GENERIC HELPERS
+#=================================================
+
+source _common.sh
+source /usr/share/yunohost/helpers
+
+#=================================================
+# DOWNLOAD, CHECK AND DEPLOY BINARY
+#=================================================
+ynh_script_progression "Setting up source files..."
+
+### Upstream ships a prebuilt static Go binary; extract=false + rename in
+### the manifest deploys it directly as $install_dir/gmaps
+ynh_setup_source --dest_dir="$install_dir"
+
+chmod 0755 "$install_dir/gmaps"
+chown -R "$app:$app" "$install_dir"
+
+#=================================================
+# INSTALL PLAYWRIGHT CHROMIUM
+#=================================================
+ynh_script_progression "Installing headless Chromium for scraping (this downloads a few hundred MB)..."
+
+mkdir -p "$browsers_dir"
+chown "$app:$app" "$browsers_dir"
+
+### Upstream supports PLAYWRIGHT_INSTALL_ONLY=1 which installs the
+### Playwright driver + Chromium and exits. Browsers live in the data dir
+### so they can be backed up; the driver lands in the app user's ~/.cache.
+ynh_exec_as_app env PLAYWRIGHT_INSTALL_ONLY=1 \
+	PLAYWRIGHT_BROWSERS_PATH="$browsers_dir" \
+	"$install_dir/gmaps" \
+	|| ynh_die "Failed to install Playwright Chromium"
+
+#=================================================
+# SYSTEMD SERVICES
+#=================================================
+ynh_script_progression "Setting up systemd service..."
+
+mkdir -p "/var/log/$app"
+chown "$app:$app" "/var/log/$app"
+
+ynh_config_add_systemd
+
+systemctl enable "$app" >/dev/null
+
+#=================================================
+# NGINX CONFIGURATION
+#=================================================
+ynh_script_progression "Setting up NGINX configuration..."
+
+ynh_config_add_nginx
+
+#=================================================
+# START SERVICE
+#=================================================
+ynh_script_progression "Starting the web server..."
+
+ynh_systemctl --service="$app" --action="start" --log_path="/var/log/$app/$app.log"
+
+#=================================================
+# END OF SCRIPT
+#=================================================
+
+ynh_script_progression "Installation of $app completed"

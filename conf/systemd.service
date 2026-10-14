@@ -1,0 +1,26 @@
+[Unit]
+Description=Google Maps Scraper web server for __APP__
+After=network.target
+
+[Service]
+Type=simple
+User=__APP__
+Group=__APP__
+WorkingDirectory=__INSTALL_DIR__
+ExecStart=__INSTALL_DIR__/gmaps -web -addr 127.0.0.1:__PORT__ -data-folder __DATA_DIR__/webdata
+Environment=PLAYWRIGHT_BROWSERS_PATH=__DATA_DIR__/browsers
+
+StandardOutput=append:/var/log/__APP__/__APP__.log
+StandardError=inherit
+
+Restart=on-failure
+RestartSec=5
+
+# Sandboxing kept minimal on purpose: Chromium subprocesses need user
+# namespaces and a wide syscall surface, so the aggressive example_ynh
+# options (RestrictNamespaces, SystemCallFilter, PrivateDevices) are omitted.
+NoNewPrivileges=yes
+PrivateTmp=yes
+
+[Install]
+WantedBy=multi-user.target

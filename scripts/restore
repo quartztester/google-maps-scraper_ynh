@@ -1,0 +1,74 @@
+#!/bin/bash
+
+#=================================================
+# IMPORT GENERIC HELPERS
+#=================================================
+
+source ../settings/scripts/_common.sh
+source /usr/share/yunohost/helpers
+
+ynh_script_progression "Restoring $app..."
+
+#=================================================
+# RESTORE THE APP MAIN DIR
+#=================================================
+ynh_restore "$install_dir"
+chown -R "$app:$app" "$install_dir"
+chmod 0755 "$install_dir/gmaps"
+
+#=================================================
+# RESTORE THE DATA DIR
+#=================================================
+mkdir -p "$data_dir"
+ynh_restore "$webdata_dir"
+chown -R "$app:$app" "$data_dir"
+
+#=================================================
+# ENSURE PLAYWRIGHT BROWSERS ARE PRESENT
+#=================================================
+ynh_script_progression "Ensuring Playwright Chromium is installed..."
+
+mkdir -p "$browsers_dir"
+chown "$app:$app" "$browsers_dir"
+
+ynh_exec_as_app env PLAYWRIGHT_INSTALL_ONLY=1 \
+	PLAYWRIGHT_BROWSERS_PATH="$browsers_dir" \
+	"$install_dir/gmaps" \
+	|| ynh_die "Failed to install Playwright Chromium"
+
+#=================================================
+# RESTORE SYSTEM CONFIGURATION
+#=================================================
+ynh_script_progression "Restoring system configuration..."
+
+mkdir -p "/var/log/$app"
+chown "$app:$app" "/var/log/$app"
+
+ynh_restore "/etc/systemd/system/$app.service"
+systemctl daemon-reload
+
+ynh_restore "/etc/nginx/conf.d/$domain.d/$app.conf" || ynh_config_add_nginx
+
+#=================================================
+# FIX RESTORED FILE PERMISSIONS
+#=================================================
+### ynh_restore's default-permission pass runs AFTER the restores and
+### chmod-400s paths that are not exactly $install_dir/$data_dir
+### (subdirs like webdata included). Fix everything once, at the end.
+chown -R "$app:$app" "$data_dir"
+chmod 0750 "$data_dir" "$webdata_dir"
+
+chown root:www-data "/etc/nginx/conf.d/$domain.d/$app.conf"
+chmod 0640 "/etc/nginx/conf.d/$domain.d/$app.conf"
+
+#=================================================
+# START SERVICES
+#=================================================
+ynh_script_progression "Starting services..."
+
+systemctl enable "$app.service" >/dev/null
+ynh_systemctl --service="$app" --action="start" --log_path="/var/log/$app/$app.log"
+
+systemctl reload nginx
+
+ynh_script_progression "Restore of $app completed"
