@@ -47,7 +47,7 @@ This package does not ship a config panel: scraping options are set per job in t
 
 Please read [the YunoHost doc on packaging](https://doc.yunohost.org/en/dev/packaging/), and in particular these docs about [app packaging](https://doc.yunohost.org/en/dev/packaging/apps).
 
-You are advised to clone the repo and install the app with `yunohost app install https://github.com/quartztester/gmaps_ynh`.
+You are advised to clone the repo and install the app with `yunohost app install https://github.com/quartztester/google-maps-scraper_ynh`.
 
 ### How to submit a PR
 
