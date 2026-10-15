@@ -2,9 +2,12 @@
 N.B. : Ce readme a été generalement automatiquement genere.
 -->
 
-# Google Maps Scraper pour YunoHost
+<h1>
+  <img src="logos/gmaps.png" width="48" alt="Google Maps Scraper logo">
+  Google Maps Scraper pour YunoHost
+</h1>
 
-[![Niveau d'integration](https://apps.yunohost.org/badges/level/gmaps)](https://apps.yunohost.org/app/gmaps)
+[![Niveau d'integration](https://apps.yunohost.org/badge/cilevel/gmaps)](https://apps.yunohost.org/app/gmaps)
 [![Installer Google Maps Scraper avec YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=gmaps)
 
 *[Read this readme in english.](./README.md)*
@@ -34,3 +37,8 @@ L'interface web et l'API utilisent des URLs absolues : l'app doit etre installee
 ## Informations developpeur
 
 Reportez-vous a [la documentation d'empaquetage](https://doc.yunohost.org/en/dev/packaging/).
+
+## Screenshots
+
+![Google Maps Scraper — webui](./doc/screenshots/webui.png)
+
