@@ -46,6 +46,7 @@ mkdir -p "/var/log/$app"
 chown "$app:$app" "/var/log/$app"
 
 ynh_config_add_systemd
+yunohost service add "$app" --description="Google Maps Scraper web server" --log="/var/log/$app/$app.log"
 
 ynh_script_progression "Recreating NGINX configuration..."
 
