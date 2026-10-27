@@ -8,8 +8,6 @@ via apps-tools script
   Google Maps Scraper for YunoHost
 </h1>
 
-[![Integration level](https://apps.yunohost.org/badge/cilevel/gmaps)](https://apps.yunohost.org/app/gmaps)
-[![Install Google Maps Scraper with YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=gmaps)
 
 *[Lire ce readme en français.](./README_fr.md)*
 

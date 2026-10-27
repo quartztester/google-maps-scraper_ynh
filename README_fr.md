@@ -7,8 +7,6 @@ N.B. : Ce readme a été generalement automatiquement genere.
   Google Maps Scraper pour YunoHost
 </h1>
 
-[![Niveau d'integration](https://apps.yunohost.org/badge/cilevel/gmaps)](https://apps.yunohost.org/app/gmaps)
-[![Installer Google Maps Scraper avec YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=gmaps)
 
 *[Read this readme in english.](./README.md)*
 
