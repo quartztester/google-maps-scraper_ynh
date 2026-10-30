@@ -20,9 +20,7 @@ ynh_backup "$install_dir"
 # BACKUP THE DATA DIR
 #=================================================
 
-### Contains jobs database + scraped results. The Playwright Chromium
-### build in $browsers_dir is deliberately NOT backed up: it is ~650 MB,
-### re-downloadable, and restored scripts re-install it when missing.
+### The ~650 MB Playwright Chromium build in $browsers_dir is deliberately NOT backed up: re-downloadable, and restore scripts re-install it when missing.
 ynh_backup "$webdata_dir"
 
 #=================================================

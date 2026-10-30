@@ -54,9 +54,7 @@ ynh_restore "/etc/nginx/conf.d/$domain.d/$app.conf" || ynh_config_add_nginx
 #=================================================
 # FIX RESTORED FILE PERMISSIONS
 #=================================================
-### ynh_restore's default-permission pass runs AFTER the restores and
-### chmod-400s paths that are not exactly $install_dir/$data_dir
-### (subdirs like webdata included). Fix everything once, at the end.
+### ynh_restore's default-permission pass runs AFTER the restores and chmod-400s everything not exactly $install_dir/$data_dir (subdirs like webdata included) — fix perms once, at the end.
 chown -R "$app:$app" "$data_dir"
 chmod 0750 "$data_dir" "$webdata_dir"
 

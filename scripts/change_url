@@ -1,7 +1,6 @@
 #!/bin/bash
 
-## this script is only run if actual change to domain/path is detected
-## new location is available via $domain and $path
+## Only run when an actual domain/path change is detected; new location is in $domain and $path
 
 #=================================================
 # IMPORT GENERIC HELPERS
