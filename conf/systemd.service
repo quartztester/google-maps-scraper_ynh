@@ -19,8 +19,10 @@ RestartSec=5
 # Sandboxing kept minimal on purpose: Chromium subprocesses need user
 # namespaces and a wide syscall surface, so the aggressive example_ynh
 # options (RestrictNamespaces, SystemCallFilter, PrivateDevices) are omitted.
-NoNewPrivileges=yes
-PrivateTmp=yes
+ NoNewPrivileges=yes
+ PrivateTmp=yes
 
+ SystemCallFilter=~@clock @debug @module @mount @obsolete @reboot @swap @cpu-emulation
+ CapabilityBoundingSet=
 [Install]
 WantedBy=multi-user.target
