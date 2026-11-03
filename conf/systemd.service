@@ -16,9 +16,7 @@ StandardError=inherit
 Restart=on-failure
 RestartSec=5
 
-# Sandboxing kept minimal on purpose: Chromium subprocesses need user
-# namespaces and a wide syscall surface, so the aggressive example_ynh
-# options (RestrictNamespaces, SystemCallFilter, PrivateDevices) are omitted.
+# minimal on purpose: Chromium needs user namespaces + wide syscall surface
  NoNewPrivileges=yes
  PrivateTmp=yes
 
