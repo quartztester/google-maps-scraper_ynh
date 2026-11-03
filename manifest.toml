@@ -7,7 +7,7 @@ name = "Google Maps Scraper"
 description.en = "Scrape Google Maps business listings with a web UI and REST API"
 description.fr = "Extracteur de fiches Google Maps avec interface web et API REST"
 
-version = "1.18.1~ynh2"
+version = "1.18.1~ynh3"
 
 maintainers = ["quartztester"]
 
