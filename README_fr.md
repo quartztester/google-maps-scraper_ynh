@@ -1,6 +1,6 @@
 <!--
-N.B. : Ce README suit la forme produite par le generateur readme_generator de
-YunoHost apps_tools ; les sections specifiques au package sont maintenus a la main.
+N.B. : Ce README a ete automatiquement genere par <https://github.com/YunoHost/apps_tools/blob/main/readme_generator>
+Il ne doit PAS etre edite a la main.
 -->
 
 <h1>
@@ -10,50 +10,35 @@ YunoHost apps_tools ; les sections specifiques au package sont maintenus a la ma
 
 Extracteur de fiches Google Maps avec interface web et API REST
 
-[![Niveau d'integration](https://apps.yunohost.org/badges/level/gmaps)](https://apps.yunohost.org/app/gmaps)
-[![Installer Google Maps Scraper avec YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=gmaps)
+[![🌐 Site officiel de l'app](https://img.shields.io/badge/Site_officiel_de_l'app-darkgreen?style=for-the-badge)](https://github.com/gosom/google-maps-scraper)
+[![Version : 1.18.1~ynh3](https://img.shields.io/badge/Version-1.18.1~ynh3-rgb(18,138,11)?style=for-the-badge)](https://ci-apps.yunohost.org/ci/apps/gmaps/)
 
 <div align="center">
 <a href="https://apps.yunohost.org/app/gmaps"><img height="100px" src="https://github.com/YunoHost/yunohost-artwork/raw/refs/heads/main/badges/neopossum-badges/badge_more_info_on_the_appstore.svg"/></a>
 <a href="https://github.com/quartztester/google-maps-scraper_ynh/issues"><img height="100px" src="https://github.com/YunoHost/yunohost-artwork/raw/refs/heads/main/badges/neopossum-badges/badge_report_an_issue.svg"/></a>
 </div>
 
-*[Read this readme in english.](./README.md)*
-
-> *Ce package permet d'installer Google Maps Scraper rapidement et simplement sur un serveur YunoHost. Si vous n'avez pas YunoHost, consultez [le guide](https://yunohost.org/#/install) pour apprendre comment l'installer.*
-
-## Vue d'ensemble
-
-Extracteur de fiches Google Maps avec interface web et API REST.
-
-**Version embarquee :** 1.18.1
-
 ## Captures d'ecran
 
-![Interface web](./doc/screenshots/webui.png)
+![Capture d'ecran de Google Maps Scraper](./doc/screenshots/webui.png)
 
-## Avertissement
+## 📦 Informations developpeur
 
-L'extraction automatisee de Google Maps peut violer les conditions d'utilisation de Google. Utilisez de maniere responsable et a vos risques.
+[![Niveau des tests automatiques](https://apps.yunohost.org/badge/cilevel/gmaps)](https://apps.yunohost.org/ci/apps/gmaps/)
 
-## Documentation et ressources
+🛠️ Depot amont de Google Maps Scraper : <https://github.com/gosom/google-maps-scraper>
 
-- Site officiel : https://github.com/gosom/google-maps-scraper
-- Depot amont : https://github.com/gosom/google-maps-scraper
-- Documentation d'administration du package : [doc/ADMIN_fr.md](./doc/ADMIN_fr.md)
-- Forums communautaires YunoHost : https://forum.yunohost.org
+Les pull requests sont les bienvenues et doivent cibler la branche [`main`](https://github.com/quartztester/google-maps-scraper_ynh/tree/main).
 
-## Limitations
+La branche `main` peut etre testee avec :
+```
+# installation fraiche :
+sudo yunohost app install https://github.com/quartztester/google-maps-scraper_ynh/tree/main
 
-L'interface web et l'API utilisent des URLs absolues : l'app doit etre installee a la racine de son domaine (chemin `/`). L'extraction necessite le Chromium headless integre (quelques centaines de Mo, installes automatiquement).
+# mise a jour d'une installation existante :
+sudo yunohost app upgrade gmaps -u https://github.com/quartztester/google-maps-scraper_ynh/tree/main
+```
 
-## Panneau de configuration
+### 📚 Documentation d'empaquetage d'app
 
-Ce package n'embarque pas de panneau de configuration : les options d'extraction se reglent par tache dans l'interface web/l'API, et le binaire amont ne lit aucun fichier de configuration serveur.
-
-## Informations developpeur
-
-- Depot du package : https://github.com/quartztester/google-maps-scraper_ynh
-- Signaler un bug dans ce package : https://github.com/quartztester/google-maps-scraper_ynh/issues
-
-Reportez-vous a [la documentation d'empaquetage](https://doc.yunohost.org/en/dev/packaging/).
+Veuillez consulter <https://doc.yunohost.org/packaging_apps> pour plus d'informations.

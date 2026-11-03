@@ -1,3 +1,5 @@
+The web UI and API hardcode absolute URLs, so the app must sit at the root of its domain (path `/`).
+
 The app has no login of its own: access is controlled by the YunoHost permission on the app's URL (by default, all YunoHost users). Anyone allowed through SSO can create scraping jobs and download results — grant access carefully.
 
 Scraping options (language, zoom, depth) are set per job in the web UI or API, not in the app settings.
