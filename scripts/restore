@@ -4,6 +4,7 @@
 # IMPORT GENERIC HELPERS
 #=================================================
 
+# Keep this path for calling _common.sh inside the execution's context of backup and restore scripts
 source ../settings/scripts/_common.sh
 source /usr/share/yunohost/helpers
 
@@ -52,9 +53,7 @@ ynh_restore "/etc/nginx/conf.d/$domain.d/$app.conf" || ynh_config_add_nginx
 #=================================================
 # FIX RESTORED FILE PERMISSIONS
 #=================================================
-### ynh_restore's default-permission pass runs AFTER the restores and
-### chmod-400s paths that are not exactly $install_dir/$data_dir
-### (subdirs like webdata included). Fix everything once, at the end.
+# ynh_restore perm pass chmod-400s non-root paths after restores; fix once at the end
 chown -R "$app:$app" "$data_dir"
 chmod 0750 "$data_dir" "$webdata_dir"
 
@@ -72,3 +71,7 @@ ynh_systemctl --service="$app" --action="start" --log_path="/var/log/$app/$app.l
 systemctl reload nginx
 
 ynh_script_progression "Restore of $app completed"
+
+#=================================================
+# END OF SCRIPT
+#=================================================
